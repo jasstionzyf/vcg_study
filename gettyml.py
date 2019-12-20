@@ -10,6 +10,7 @@ from pyspark.sql.types import StringType
 from pyspark.sql.types import StructField
 from pyspark.sql.types import StructType
 from pyspark.sql.window import Window
+
 from vcgImageAI.comm.sparkBase import *
 from vcgImageAI.comm.vcgUtils import *
 
@@ -52,7 +53,7 @@ def run():
     gettyImagesMeta_df = gettyImagesMeta_df.rdd.filter(lambda row: ((row.kwIds is not None))).flatMap(
         lambda row: flatMap1(row)).toDF().cache()
     gettyImagesMeta_df.show(100, False)
-    print('total imageId-kwId count:%d' % gettyImagesMeta_df.count())
+    # print('total imageId-kwId count:%d' % gettyImagesMeta_df.count())
 
     gettyKwIdCount_df = gettyImagesMeta_df.groupBy("kwId").agg(
         {'*': 'count'}).withColumnRenamed('count(1)', 'count')
@@ -90,10 +91,14 @@ def run():
         labelsIndexMappingFile)
     kwIdsSet = set()
 
-    def fun1(row):
-        kwIdsSet.add(row.kwId)
 
-    gettyKwIdCount_df.select('index', 'kwId').rdd.collect().foreach(fun1)
+
+
+    kwIds=gettyKwIdCount_df.select('index', 'kwId').rdd.collect()
+    for row in kwIds:
+        kwIdsSet.add(row.kwId)
+    print('filterd kwIds size: %d'% len(kwIdsSet))
+
     kwIdsSet_broadcast = spark.sparkContext.broadcast(kwIdsSet)
 
     gettytopNumImagesOfKwIdFile = '{}gettytopNumImagesOfKwId.csv'.format(topFolder)
