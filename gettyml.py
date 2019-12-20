@@ -149,7 +149,7 @@ def run():
             return accumulator2
 
     gettyImagesMeta_df = gettyImagesMeta_df.rdd.filter(lambda row: filterKwIds(row)).map(
-        lambda row: (row.gettyImageId, row.kwId)).aggregateByKey(zero_value_2, seqFunc_2, combFunc_2).toDF()
+        lambda row: (row.gettyImageId, row.kwId)).aggregateByKey(zero_value_2, seqFunc_2, combFunc_2).toDF().withColumnRenamed('_2', 'kwIds').withColumnRenamed('_1', 'gettyImageId')
     gettyImagesMeta_df.show(100, False)
 
 
