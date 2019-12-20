@@ -150,6 +150,9 @@ def run():
 
     gettyImagesMeta_df = gettyImagesMeta_df.rdd.filter(lambda row: filterKwIds(row)).map(
         lambda row: (row.gettyImageId, row.kwId)).aggregateByKey(zero_value_2, seqFunc_2, combFunc_2).toDF()
+    gettyImagesMeta_df.show(100, False)
+
+
     finalImageKwIds_df = gettytopNumImagesOfKwId_df.join(gettyImagesMeta_df,
                                                          gettyImagesMeta_df.gettyImageId == gettytopNumImagesOfKwId_df.imageId,
                                                          how='inner').drop(
