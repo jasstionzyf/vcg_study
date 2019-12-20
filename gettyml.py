@@ -101,7 +101,7 @@ def run():
 
     kwIdsSet_broadcast = spark.sparkContext.broadcast(kwIdsSet)
 
-    gettytopNumImagesOfKwIdFile = '{}gettytopNumImagesOfKwId.csv'.format(topFolder)
+    gettytopNumImagesOfKwIdFile = '{}kwsTopNumImages.csv'.format(topFolder)
     # kwId,topNumImages
 
     finalImageKwIdsFile = '{}finalImageKwIds.csv'.format(topFolder)
