@@ -33,11 +33,11 @@ def run():
     gettyImagesMeta_df = spark.read.format("csv").option("header", "false").schema(schema).option("delimiter",
                                                                                                   '\t').load(
         gettyImagesMetaFile)
-    print('gettyImagesMeta_df: %s' % gettyImagesMeta_df.count())
+    # print('gettyImagesMeta_df: %s' % gettyImagesMeta_df.count())
 
     gettyImagesMeta_df = gettyImagesMeta_df.filter(gettyImagesMeta_df.kwIds.isNotNull()).rdd.filter(
         lambda row: row.kwIds is not None).toDF()
-    print('gettyImagesMeta_df kwIds not null count: %s' % gettyImagesMeta_df.count())
+    # print('gettyImagesMeta_df kwIds not null count: %s' % gettyImagesMeta_df.count())
 
     # compute kwId count, generate kwIdsCount.csv
 
@@ -129,7 +129,8 @@ def run():
         lambda row: flatMaps(row)).toDF()
 
     gettytopNumImagesOfKwId_df = gettytopNumImagesOfKwId_df.groupBy("imageId").agg(
-        {'*': 'count'}).withColumnRenamed('count(1)', 'count')
+        {'*': 'count'}).withColumnRenamed('count(1)', 'count').drop(
+        'count')
     gettyImagesMeta_df = gettyImagesMeta_df.withColumnRenamed('imageId', 'gettyImageId')
     # gettyImagesMeta_df 过滤 然后合并imageId-kwId to imageId-kwIds (aggregate operation)
     zero_value_2 = None
@@ -172,7 +173,7 @@ def run():
         '\t').mode(
         "overwrite").save(finalImageKwIdsFile)
 
-    print('finalImageKwIds count: %d' % finalImageKwIds_df.count())
+    # print('finalImageKwIds count: %d' % finalImageKwIds_df.count())
 
     # based on generated finalImageKwIds info to generate final tfrecords as train data
 
