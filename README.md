@@ -18,6 +18,8 @@ https://spark.apache.org/docs/latest/rdd-programming-guide.html
 - 直接运行代码：nohup spark-submit --master yarn --name {your_name}-test.py  
 --py-files hdfs://172.16.241.100:9000/data/stuff/vcgImageAI.zip,hdfs://172.16.241.100:9000/data/stuff/vcgPylibary.tar.gz 
 --deploy-mode cluster   --num-executors 10 --executor-cores 5 --executor-memory 4G  gettyml.py> ./out &
+- 进入http://172.16.241.100:8088/cluster/apps/RUNNING 查看自己提交程序的运行相关日志
+
 
 
 
