@@ -3,6 +3,7 @@ from vcgImageAI.comm.vcgUtils import *
 
 sparkBase = SparkBase()
 spark = sparkBase.createYarnSparkEnv()
+sc = spark.sparkContext
 
 
 
@@ -13,7 +14,12 @@ spark = sparkBase.createYarnSparkEnv()
 
 
 def run():
-    sc = spark.sparkContext
+
+
+
+    '''
+    following is your own code
+    '''
 
     def seq_op(accumulator, element):
         if (accumulator[1] > element[1]):

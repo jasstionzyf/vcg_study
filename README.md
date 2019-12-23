@@ -17,7 +17,7 @@ https://spark.apache.org/docs/latest/rdd-programming-guide.html
 - cd 到自己上一步创建的目录， 然后运行命令：git clone https://github.com/jasstionzyf/vcg_study.git  && cd ./vcg_study, 如果已经clone ， 运行git pull更新代码
 - 直接运行代码：nohup spark-submit --master yarn --name {your_name}-test.py  
 --py-files hdfs://172.16.241.100:9000/data/stuff/vcgImageAI.zip,hdfs://172.16.241.100:9000/data/stuff/vcgPylibary.tar.gz 
---deploy-mode cluster   --num-executors 10 --executor-cores 5 --executor-memory 4G  test.py> ./out &
+--deploy-mode cluster   --num-executors 1 --executor-cores 1 --executor-memory 2G  test.py> ./out &
 - 进入http://172.16.241.100:8088/cluster/apps/RUNNING 查看自己提交程序的运行相关日志
 
 
