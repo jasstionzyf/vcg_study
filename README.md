@@ -5,10 +5,15 @@
 
 
 
+
+
+服务地址：
+- hdfs cluster: http://172.16.241.100:50070/explorer.html#/data
+- yarn cluster: http://172.16.241.100:8088/cluster
+
 本项目的所有的spark相关代码都是基于pyspark（python 语言实现的spark客户libary）
 spark pyspark相关文档：
 https://spark.apache.org/docs/latest/rdd-programming-guide.html
-
 
 
 程序部署运行步骤：
