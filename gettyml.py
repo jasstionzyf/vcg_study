@@ -20,7 +20,7 @@ spark = sparkBase.createYarnSparkEnv()
 
 def run():
     topFolder = 'hdfs://172.16.241.100:9000/data/stuff/getty/'
-    gettyImagesMetaFile = '{}allGettyMeta.csv'.format(topFolder)
+    gettyImagesMetaFile = '{}allGettyMeta_1000000.csv'.format(topFolder)
     # imageId  kwIds  vcgImageId
     print(gettyImagesMetaFile)
     gettyKwIdCountFile = '{}gettyKwIdCount.csv'.format(topFolder)
