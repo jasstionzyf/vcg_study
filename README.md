@@ -17,16 +17,16 @@ https://spark.apache.org/docs/latest/rdd-programming-guide.html
 
 
 
-hadoop yarn docker run:
-cd /data/apps/hadoop-3.2.1
-yarn jar ./share/hadoop/yarn/hadoop-yarn-applications-distributedshell-3.2.1.jar \
+**hadoop yarn docker run:**
+- cd /data/apps/hadoop-3.2.1
+- `yarn jar ./share/hadoop/yarn/hadoop-yarn-applications-distributedshell-3.2.1.jar \
        -jar ./share/hadoop/yarn/hadoop-yarn-applications-distributedshell-3.2.1.jar \
        -shell_env YARN_CONTAINER_RUNTIME_TYPE=docker \
        -shell_env YARN_CONTAINER_RUNTIME_DOCKER_IMAGE=local/imageai_bigdata \
-       -shell_command 'echo $PWD' \
+       -shell_command 'nvidia-smi & sleep 3' \
        -container_resources memory-mb=3072,vcores=1,yarn.io/gpu=1  \
-       -num_containers 1
-shell_command 可以指定任何你想运行的系统支持的命令，比如：nvidia-smi  确定hadoop yarn给你分配的容器里面有一个gpu资源
+       -num_containers 1`
+- shell_command 可以指定任何你想运行的系统支持的命令，比如：nvidia-smi  确定hadoop yarn给你分配的容器里面有一个gpu资源
 
 
 
